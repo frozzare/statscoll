@@ -31,7 +31,7 @@ statscoll [-c config.yml]
 
 Then you can add stats via http:
 
-```
+```json
 POST /stats
 {
     "count": 10,
@@ -45,7 +45,7 @@ Additional properties:
 
 Then you can list stats value:
 
-```
+```json
 GET /stats/metric-name
 [
     {
