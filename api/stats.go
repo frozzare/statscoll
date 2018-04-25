@@ -1,7 +1,6 @@
 package api
 
 import (
-	"encoding/json"
 	"errors"
 	"net/http"
 	"sort"
@@ -12,31 +11,8 @@ import (
 )
 
 var (
-	errCreateStat   = errors.New("Could not create new stat")
 	errNoStatsFound = errors.New("No stats found")
 )
-
-func (h *Handler) handleCreate(r *http.Request) (interface{}, interface{}) {
-	var stat *stat.Stat
-
-	defer r.Body.Close()
-
-	if err := json.NewDecoder(r.Body).Decode(&stat); err != nil {
-		return nil, errCreateStat
-	}
-
-	if stat.Timestamp == 0 {
-		stat.Timestamp = time.Now().Unix()
-	}
-
-	if err := h.db.Create(stat).Error; err != nil {
-		return nil, errCreateStat
-	}
-
-	return map[string]interface{}{
-		"success": true,
-	}, nil
-}
 
 func (h *Handler) handleList(r *http.Request, ps httpapi.Params) (interface{}, interface{}) {
 	var stats []*stat.Stat

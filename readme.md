@@ -32,7 +32,7 @@ statscoll [-c config.yml]
 Then you can add stats via http:
 
 ```json
-POST /stats
+POST /collect
 {
     "count": 10,
     "metric": "metric-name"

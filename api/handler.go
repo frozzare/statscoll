@@ -22,7 +22,7 @@ func NewHandler(db *db.DB) (*Handler, error) {
 		db:     db,
 	}
 
-	h.Post("/stats", h.handleCreate)
+	h.Post("/stats", h.handleCollect)
 	h.Get("/stats/:metric", h.handleList)
 	h.Get("/total/:metric", h.handleTotal)
 

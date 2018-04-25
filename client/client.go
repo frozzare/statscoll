@@ -32,7 +32,7 @@ func (c *Client) Collect(s *stat.Stat) error {
 		return err
 	}
 
-	req, err := http.NewRequest("POST", fmt.Sprintf("%s/stats", c.url), bytes.NewBuffer(buf))
+	req, err := http.NewRequest("POST", fmt.Sprintf("%s/collect", c.url), bytes.NewBuffer(buf))
 	if err != nil {
 		return err
 	}
