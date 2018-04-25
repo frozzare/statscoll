@@ -24,20 +24,24 @@ func (c *Config) Default() error {
 		c.Port = 9300
 	}
 
+	if len(c.DSN) == 0 {
+		c.DSN = "root@/statscoll?charset=utf8&parseTime=true"
+	}
+
 	return nil
 }
 
 // ReadFile creates a new config struct from a yaml file.
 func ReadFile(file string) (*Config, error) {
-	dat, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-
 	var config *Config
 
-	if err := yaml.Unmarshal(dat, &config); err != nil {
-		return &Config{}, err
+	dat, err := ioutil.ReadFile(file)
+	if err == nil {
+		if err := yaml.Unmarshal(dat, &config); err != nil {
+			return &Config{}, err
+		}
+	} else {
+		config = &Config{}
 	}
 
 	if err := config.Default(); err != nil {
