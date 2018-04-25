@@ -9,6 +9,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/frozzare/go"
+  packages = ["http2"]
+  revision = "35b1cc1e4b1377809424e62d25f2ff3c2cf29cb4"
+
+[[projects]]
+  branch = "master"
   name = "github.com/frozzare/go-httpapi"
   packages = ["."]
   revision = "aaf5c5aaceebd0a2548042bcf51760b76ca0d902"
@@ -43,9 +49,27 @@
   packages = ["."]
   revision = "03f45bd4b7dad4734bc4620e46a35789349abb20"
 
+[[projects]]
+  name = "github.com/pkg/errors"
+  packages = ["."]
+  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
+  version = "v0.8.0"
+
+[[projects]]
+  name = "github.com/spf13/pflag"
+  packages = ["."]
+  revision = "583c0c0531f06d5278b7d917446061adc344b5cd"
+  version = "v1.0.1"
+
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bbec0766364ae18c7f5c0b359c434e66d1a8b7c0157daac15ed241536e5cd922"
+  inputs-digest = "86011ea6aeb6fb0659939ad0944a901218e8428c96d2927ddb9ed3b1a96bc9f3"
   solver-name = "gps-cdcl"
   solver-version = 1
