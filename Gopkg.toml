@@ -1,0 +1,11 @@
+[[constraint]]
+  name = "github.com/TV4/graceful"
+  version = "0.3.3"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/frozzare/go-httpapi"
+
+[[constraint]]
+  name = "github.com/jinzhu/gorm"
+  version = "1.9.1"

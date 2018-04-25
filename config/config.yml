@@ -1,0 +1,2 @@
+port: 9300
+dsn: root@/statscoll?charset=utf8&parseTime=true
