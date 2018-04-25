@@ -16,6 +16,8 @@ Create a config file `config.yml`
 
 The `dsn` value is the data source name used to connect to the mysql database. Read more about [dsn](https://github.com/go-sql-driver/mysql#dsn-data-source-name).
 
+This is the default values.
+
 ```yaml
 port: 9300
 dsn: root@/statscoll?charset=utf8&parseTime=true
