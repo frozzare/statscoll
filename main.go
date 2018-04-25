@@ -11,6 +11,7 @@ import (
 	"github.com/frozzare/statscoll/api"
 	"github.com/frozzare/statscoll/config"
 	"github.com/frozzare/statscoll/db"
+	"github.com/frozzare/statscoll/stat"
 	"github.com/spf13/pflag"
 )
 
@@ -33,6 +34,9 @@ func main() {
 	if err != nil {
 		log.Fatalf("statscoll: %s\n", err)
 	}
+	defer db.Close()
+
+	db.AutoMigrate(&stat.Stat{})
 
 	handler, err := api.NewHandler(db)
 	if err != nil {

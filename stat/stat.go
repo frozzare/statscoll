@@ -1,4 +1,4 @@
-package db
+package stat
 
 // Stat represents a stat value.
 type Stat struct {

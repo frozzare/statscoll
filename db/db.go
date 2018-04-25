@@ -18,7 +18,5 @@ func Open(typ string, dsn string) (*DB, error) {
 
 	db := &DB{conn}
 
-	db.AutoMigrate(&Stat{})
-
 	return db, nil
 }

@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/frozzare/go-httpapi"
-	"github.com/frozzare/statscoll/db"
+	"github.com/frozzare/statscoll/stat"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 )
 
 func (h *Handler) handleCreate(r *http.Request) (interface{}, interface{}) {
-	var stat *db.Stat
+	var stat *stat.Stat
 
 	defer r.Body.Close()
 
@@ -40,7 +40,7 @@ func (h *Handler) handleCreate(r *http.Request) (interface{}, interface{}) {
 }
 
 func (h *Handler) handleList(r *http.Request, ps httpapi.Params) (interface{}, interface{}) {
-	var stats []*db.Stat
+	var stats []*stat.Stat
 
 	qs := r.URL.Query()
 	metric := ps.ByName("metric")
