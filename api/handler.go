@@ -5,24 +5,23 @@ import (
 	"strconv"
 
 	"github.com/frozzare/go-httpapi"
-	"github.com/frozzare/statscoll/db"
 	"github.com/jinzhu/gorm"
 )
 
 // Handler represents a the api handler.
 type Handler struct {
 	*httpapi.Router
-	db *db.DB
+	db *gorm.DB
 }
 
 // NewHandler creates a new handler.
-func NewHandler(db *db.DB) (*Handler, error) {
+func NewHandler(db *gorm.DB) (*Handler, error) {
 	h := &Handler{
 		Router: httpapi.NewRouter(),
 		db:     db,
 	}
 
-	h.Post("/stats", h.handleCollect)
+	h.Post("/collect", h.handleCollect)
 	h.Get("/stats/:metric", h.handleList)
 	h.Get("/total/:metric", h.handleTotal)
 

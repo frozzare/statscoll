@@ -5,12 +5,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	"github.com/TV4/graceful"
 	"github.com/frozzare/statscoll/api"
 	"github.com/frozzare/statscoll/config"
-	"github.com/frozzare/statscoll/db"
 	"github.com/frozzare/statscoll/stat"
 	"github.com/spf13/pflag"
 )
@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	db, err := db.Open("mysql", c.DSN)
+	db, err := gorm.Open("mysql", c.DSN)
 	if err != nil {
 		log.Fatalf("statscoll: %s\n", err)
 	}
