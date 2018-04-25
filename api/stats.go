@@ -3,10 +3,8 @@ package api
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"net/http"
 	"sort"
-	"strconv"
 	"time"
 
 	"github.com/frozzare/go-httpapi"
@@ -14,7 +12,8 @@ import (
 )
 
 var (
-	errCreateStat = errors.New("Could not create new stat")
+	errCreateStat   = errors.New("Could not create new stat")
+	errNoStatsFound = errors.New("No stats found")
 )
 
 func (h *Handler) handleCreate(r *http.Request) (interface{}, interface{}) {
@@ -42,38 +41,14 @@ func (h *Handler) handleCreate(r *http.Request) (interface{}, interface{}) {
 func (h *Handler) handleList(r *http.Request, ps httpapi.Params) (interface{}, interface{}) {
 	var stats []*stat.Stat
 
-	qs := r.URL.Query()
-	metric := ps.ByName("metric")
-	query := h.db.Where("`metric` = ?", metric)
-
-	// Parse start query string if any.
-	if start := qs.Get("start"); len(start) > 0 {
-		i, err := strconv.ParseInt(start, 10, 64)
-		if err != nil {
-			return nil, err
-		}
-
-		query = query.Where("timestamp >= ?", i)
-	}
-
-	// Parse end query string if any.
-	if end := qs.Get("end"); len(end) > 0 {
-		i, err := strconv.ParseInt(end, 10, 64)
-		if err != nil {
-			return nil, err
-		}
-
-		query = query.Where("timestamp <= ?", i)
-	}
-
-	// Add project query string if any.
-	if project := qs.Get("project"); len(project) > 0 {
-		query = query.Where("project = ?", project)
+	query, err := h.statsQuery(r, ps)
+	if err != nil {
+		return nil, errNoStatsFound
 	}
 
 	// Execute query and find any errors.
 	if err := query.Find(&stats).Error; err != nil || len(stats) == 0 {
-		return nil, fmt.Errorf("No stats found for: %s", metric)
+		return nil, errNoStatsFound
 	}
 
 	// Sort stats so the last one is listed first.

@@ -60,6 +60,15 @@ Possible query strings are:
 - `end` to filter stat values that ends with timestamp value
 - `project` to filter projects with same metric names as other projects.
 
+Get total of count with the same query strings as for stats endpoint:
+
+```json
+GET /total/metric-name
+{
+    "total": 10
+}
+```
+
 ## License
 
 MIT © [Fredrik Forsmo](https://github.com/frozzare)
