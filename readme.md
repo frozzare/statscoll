@@ -14,7 +14,7 @@ go get -u github.com/frozzare/statscoll
 
 Create a config file `config.yml`
 
-The `dsn` value is the data source name used to connect to the mysql database.
+The `dsn` value is the data source name used to connect to the mysql database. Read more about [dsn](https://github.com/go-sql-driver/mysql#dsn-data-source-name).
 
 ```yaml
 port: 9300
