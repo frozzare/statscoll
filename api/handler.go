@@ -25,6 +25,7 @@ func NewHandler(db *gorm.DB) (*Handler, error) {
 	h.Post("/collect", h.handleCollect)
 	h.Get("/stats/:metric", h.handleList)
 	h.Get("/total/:metric", h.handleTotal)
+	h.Get("/graph/:metric", h.handleGraph)
 
 	return h, nil
 }
