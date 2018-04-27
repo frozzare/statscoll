@@ -22,7 +22,7 @@ func (h *Handler) handleTotal(r *http.Request, ps httpapi.Params) (interface{}, 
 		Total int64 `json:"total"`
 	}
 
-	if err := query.Model(&stat.Stat{}).Select("sum(count) as total").Scan(&result).Error; err != nil {
+	if err := query.Model(&stat.Stat{}).Select("sum(value) as total").Scan(&result).Error; err != nil {
 		return nil, err
 	}
 

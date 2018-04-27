@@ -34,8 +34,8 @@ Then you can add stats via http:
 ```json
 POST /collect
 {
-    "count": 10,
-    "metric": "metric-name"
+    "metric": "metric-name",
+    "value": 10.0
 }
 ```
 
@@ -49,8 +49,8 @@ Then you can list stats value:
 GET /stats/metric-name
 [
     {
-        "count": 10,
         "metric": "metric-name",
+        "value": 10.0
     }
 ]
 ```
@@ -60,12 +60,12 @@ Possible query strings are:
 - `end` to filter stat values that ends with timestamp value
 - `project` to filter projects with same metric names as other projects.
 
-Get total of count with the same query strings as for stats endpoint:
+Get total of value with the same query strings as for stats endpoint:
 
 ```json
 GET /total/metric-name
 {
-    "total": 10
+    "total": 10.0
 }
 ```
 
