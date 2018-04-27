@@ -3,6 +3,7 @@ package api
 import (
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/frozzare/go-httpapi"
 	"github.com/jinzhu/gorm"
@@ -57,6 +58,15 @@ func (h *Handler) statsQuery(r *http.Request, ps httpapi.Params) (*gorm.DB, erro
 	// Add project query string if any.
 	if project := qs.Get("project"); len(project) > 0 {
 		query = query.Where("project = ?", project)
+	}
+
+	// Add last query string to filter last days.
+	if last := qs.Get("last"); len(last) > 0 {
+		i, err := strconv.ParseInt(last, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		query = query.Where("timestamp >= ?", time.Now().AddDate(0, 0, -int(i)).Unix())
 	}
 
 	return query, nil

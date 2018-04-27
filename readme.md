@@ -58,6 +58,7 @@ GET /stats/metric-name
 Possible query strings are:
 - `start` to filter stat values that starts with timestamp value
 - `end` to filter stat values that ends with timestamp value
+- `last` to filter stat values that are within the last days value, e.g `last=30` to show last 30 days.
 - `project` to filter projects with same metric names as other projects.
 
 Get total of value with the same query strings as for stats endpoint:
