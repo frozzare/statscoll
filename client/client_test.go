@@ -18,8 +18,8 @@ func TestClient(t *testing.T) {
 	c := New(server.URL)
 
 	err := c.Collect(&stat.Stat{
-		Count:  23,
 		Metric: "test",
+		Value:  23.0,
 	})
 
 	if err != nil {
