@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 	"time"
 
@@ -28,6 +29,10 @@ func (h *Handler) handleCollect(r *http.Request) (interface{}, interface{}) {
 
 	if err := h.db.Create(stat).Error; err != nil {
 		return nil, errCollectStat
+	}
+
+	if err := h.cache.RemovePrefix(stat.Key()); err != nil {
+		log.Println(err)
 	}
 
 	return map[string]interface{}{

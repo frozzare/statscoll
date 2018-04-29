@@ -3,9 +3,11 @@ package api
 import (
 	"bytes"
 	"encoding/base64"
+	"fmt"
 	"html/template"
 	"net/http"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/frozzare/go-httpapi"
@@ -54,6 +56,17 @@ func generateGraphHTMLPage(c string) ([]byte, error) {
 
 func (h *Handler) handleGraph(w http.ResponseWriter, r *http.Request, ps httpapi.Params) {
 	var stats []*stat.Stat
+
+	key := fmt.Sprintf("%s_%s_%s", r.URL.Query().Get("project"), ps.ByName("metric"), r.URL.String())
+	if v, err := h.cache.GetByte(key); err == nil {
+		if strings.Contains(key, "output=image") {
+			w.Header().Set("Content-Type", "image/png")
+		} else {
+			w.Header().Set("Content-Type", "text/html")
+		}
+
+		w.Write(v)
+	}
 
 	query, err := h.statsQuery(r, ps)
 	if err != nil {
@@ -121,11 +134,19 @@ func (h *Handler) handleGraph(w http.ResponseWriter, r *http.Request, ps httpapi
 		},
 	}
 
-	if len(r.URL.Query().Get("image")) > 0 {
+	if r.URL.Query().Get("output") == "image" {
 		w.Header().Set("Content-Type", "image/png")
-		if err := graph.Render(chart.PNG, w); err != nil {
+		buf := bytes.NewBuffer([]byte{})
+		if err := graph.Render(chart.PNG, buf); err != nil {
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
+
+		b := buf.Bytes()
+		if err := h.cache.Set(key, b); err != nil {
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+
+		w.Write(b)
 		return
 	}
 
@@ -140,6 +161,10 @@ func (h *Handler) handleGraph(w http.ResponseWriter, r *http.Request, ps httpapi
 	if err != nil {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
+	}
+
+	if err := h.cache.Set(key, b); err != nil {
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 	}
 
 	w.Write(b)

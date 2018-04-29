@@ -2,10 +2,28 @@
 
 
 [[projects]]
-  name = "github.com/TV4/graceful"
+  name = "github.com/coreos/bbolt"
   packages = ["."]
-  revision = "38c3c4980bed6ed0aac95529c2cded4986e0e2a8"
-  version = "v0.3.3"
+  revision = "583e8937c61f1af6513608ccc75c97b6abdf4ff9"
+  version = "v1.3.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/clock"
+  packages = ["."]
+  revision = "600d898af40aa09a7a93ecb9265d87b0504b6f03"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/httpdown"
+  packages = ["."]
+  revision = "a3b1354551a26449fbe05f5d855937f6e7acbd71"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/stats"
+  packages = ["."]
+  revision = "1b76add642e42c6ffba7211ad7b3939ce654526e"
 
 [[projects]]
   branch = "master"
@@ -28,18 +46,12 @@
 [[projects]]
   branch = "master"
   name = "github.com/golang/freetype"
-  packages = [
-    "raster",
-    "truetype"
-  ]
+  packages = ["raster","truetype"]
   revision = "e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4"
 
 [[projects]]
   name = "github.com/jinzhu/gorm"
-  packages = [
-    ".",
-    "dialects/mysql"
-  ]
+  packages = [".","dialects/mysql"]
   revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
   version = "v1.9.1"
 
@@ -75,27 +87,21 @@
 
 [[projects]]
   name = "github.com/wcharczuk/go-chart"
-  packages = [
-    ".",
-    "drawing",
-    "matrix",
-    "roboto",
-    "seq",
-    "util"
-  ]
+  packages = [".","drawing","matrix","roboto","seq","util"]
   revision = "7c3982fe3d8ab0c9eea9ab5d2aced51e45d447bc"
   version = "v2.0.1"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/image"
-  packages = [
-    "draw",
-    "font",
-    "math/f64",
-    "math/fixed"
-  ]
+  packages = ["draw","font","math/f64","math/fixed"]
   revision = "f315e440302883054d0c2bd85486878cb4f8572c"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "cbbc999da32df943dac6cd71eb3ee39e1d7838b9"
 
 [[projects]]
   name = "gopkg.in/yaml.v2"
@@ -106,6 +112,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e0c384b36371a8475a01f29c239933f1c5973977dd6b8b20783cfa275274e35c"
+  inputs-digest = "71507bb3576da0bbbfe31b34ffef4f15338742d7070879963478a0e3534d0152"
   solver-name = "gps-cdcl"
   solver-version = 1
