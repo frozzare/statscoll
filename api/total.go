@@ -14,7 +14,7 @@ var (
 )
 
 func (h *Handler) handleTotal(r *http.Request, ps httpapi.Params) (interface{}, interface{}) {
-	key := fmt.Sprintf("%s_%s_%s", ps.ByName("metric"), r.URL.Query().Get("project"), r.URL.String())
+	key := fmt.Sprintf("%s_%s_%s", r.URL.Query().Get("project"), ps.ByName("metric"), r.URL.String())
 	if v, err := h.cache.Get(key); err == nil {
 		return v, nil
 	}

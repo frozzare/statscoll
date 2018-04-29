@@ -3,7 +3,6 @@ package api
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -32,7 +31,7 @@ func (h *Handler) handleCollect(r *http.Request) (interface{}, interface{}) {
 		return nil, errCollectStat
 	}
 
-	if err := h.cache.RemovePrefix(fmt.Sprintf("%s_%s", stat.Metric, stat.Project)); err != nil {
+	if err := h.cache.RemovePrefix(stat.Key()); err != nil {
 		log.Println(err)
 	}
 
