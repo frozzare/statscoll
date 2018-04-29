@@ -25,8 +25,7 @@ func TestCache(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	v, err = c.Get("test")
-	if err == nil {
+	if _, err := c.Get("test"); err == nil {
 		t.Fatal(err)
 	}
 }
