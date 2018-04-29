@@ -2,6 +2,7 @@ package cache
 
 import (
 	"encoding/json"
+	"errors"
 	"strings"
 	"time"
 
@@ -39,6 +40,11 @@ func (c *Cache) Get(key string) (interface{}, error) {
 
 	err := c.db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket(c.bucket)
+
+		if b == nil {
+			return bolt.ErrBucketNotFound
+		}
+
 		buf := b.Get([]byte(key))
 
 		return json.Unmarshal(buf, &v)
@@ -72,7 +78,16 @@ func (c *Cache) Set(key string, value interface{}) error {
 func (c *Cache) RemovePrefix(key string) error {
 	return c.db.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket(c.bucket)
+
+		if b == nil {
+			return bolt.ErrBucketNotFound
+		}
+
 		c := b.Cursor()
+
+		if b == nil {
+			return errors.New("cursor not found")
+		}
 
 		for k, _ := c.First(); k != nil; k, _ = c.Next() {
 			if strings.HasPrefix(string(k), key) {

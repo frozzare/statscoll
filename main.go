@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/facebookgo/httpdown"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"github.com/TV4/graceful"
 	"github.com/frozzare/statscoll/api"
 	"github.com/frozzare/statscoll/cache"
 	"github.com/frozzare/statscoll/config"
@@ -55,10 +55,19 @@ func main() {
 		log.Fatalf("statscoll: %s\n", err)
 	}
 
-	graceful.Timeout = 10 * time.Second
+	hd := &httpdown.HTTP{
+		StopTimeout: 10 * time.Second,
+		KillTimeout: 1 * time.Second,
+	}
 
-	graceful.LogListenAndServe(&http.Server{
+	fmt.Printf("Listening on http://0.0.0.0:%d\n", c.Port)
+
+	server := &http.Server{
 		Addr:    fmt.Sprintf(":%d", c.Port),
 		Handler: handler,
-	})
+	}
+
+	if err := httpdown.ListenAndServe(server, hd); err != nil {
+		log.Fatal(err)
+	}
 }

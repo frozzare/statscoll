@@ -2,10 +2,28 @@
 
 
 [[projects]]
-  name = "github.com/TV4/graceful"
+  name = "github.com/coreos/bbolt"
   packages = ["."]
-  revision = "38c3c4980bed6ed0aac95529c2cded4986e0e2a8"
-  version = "v0.3.3"
+  revision = "583e8937c61f1af6513608ccc75c97b6abdf4ff9"
+  version = "v1.3.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/clock"
+  packages = ["."]
+  revision = "600d898af40aa09a7a93ecb9265d87b0504b6f03"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/httpdown"
+  packages = ["."]
+  revision = "a3b1354551a26449fbe05f5d855937f6e7acbd71"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/stats"
+  packages = ["."]
+  revision = "1b76add642e42c6ffba7211ad7b3939ce654526e"
 
 [[projects]]
   branch = "master"
@@ -62,6 +80,12 @@
   version = "v1.0.1"
 
 [[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  revision = "cbbc999da32df943dac6cd71eb3ee39e1d7838b9"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
@@ -70,6 +94,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "86011ea6aeb6fb0659939ad0944a901218e8428c96d2927ddb9ed3b1a96bc9f3"
+  inputs-digest = "cb28e5206678b19ab2d4daf21a44dd520d4c2056730c1cc539a7e35cb06e1c0a"
   solver-name = "gps-cdcl"
   solver-version = 1
