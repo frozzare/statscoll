@@ -57,29 +57,6 @@ func (c *Cache) Get(key string) (interface{}, error) {
 	return v, nil
 }
 
-// GetByte gets a byte value from cache returns it or a error.
-func (c *Cache) GetByte(key string) ([]byte, error) {
-	var v []byte
-
-	err := c.db.View(func(tx *bolt.Tx) error {
-		b := tx.Bucket(c.bucket)
-
-		if b == nil {
-			return bolt.ErrBucketNotFound
-		}
-
-		v = b.Get([]byte(key))
-
-		return nil
-	})
-
-	if err != nil {
-		return nil, err
-	}
-
-	return v, nil
-}
-
 // Set sets a value and return a error if any.
 func (c *Cache) Set(key string, value interface{}) error {
 	return c.db.Update(func(tx *bolt.Tx) error {

@@ -4,8 +4,6 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/frozzare/statscoll/stat"
 )
 
 func TestClient(t *testing.T) {
@@ -17,7 +15,7 @@ func TestClient(t *testing.T) {
 
 	c := New(server.URL)
 
-	err := c.Collect(&stat.Stat{
+	err := c.Collect(Stat{
 		Metric: "test",
 		Value:  23.0,
 	})

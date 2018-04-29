@@ -11,6 +11,9 @@ import (
 	"github.com/pkg/errors"
 )
 
+// Stat represents a stat value.
+type Stat = stat.Stat
+
 // Client represents a new client.
 type Client struct {
 	client *http2.Client
@@ -26,7 +29,7 @@ func New(url string) *Client {
 }
 
 // Collect post a stat value to statscoll api.
-func (c *Client) Collect(s *stat.Stat) error {
+func (c *Client) Collect(s stat.Stat) error {
 	buf, err := json.Marshal(s)
 	if err != nil {
 		return err
