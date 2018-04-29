@@ -6,19 +6,22 @@ import (
 	"time"
 
 	"github.com/frozzare/go-httpapi"
+	"github.com/frozzare/statscoll/cache"
 	"github.com/jinzhu/gorm"
 )
 
 // Handler represents a the api handler.
 type Handler struct {
 	*httpapi.Router
-	db *gorm.DB
+	cache *cache.Cache
+	db    *gorm.DB
 }
 
 // NewHandler creates a new handler.
-func NewHandler(db *gorm.DB) (*Handler, error) {
+func NewHandler(c *cache.Cache, db *gorm.DB) (*Handler, error) {
 	h := &Handler{
 		Router: httpapi.NewRouter(),
+		cache:  c,
 		db:     db,
 	}
 
